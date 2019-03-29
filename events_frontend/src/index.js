@@ -2,6 +2,7 @@ const userEndPoint = 'http://localhost:3000/api/v1/users';
 const BASEURL = 'https://app.ticketmaster.com/discovery/v2/events?apikey='
 const APIKEY = 'tSqmpxsVdaylI75DcdQTKHYNGTGddSG1'
 const endPoint = 'http://localhost:3000/api/v1/events';
+const querySize = '&size=60'
 
 document.addEventListener('DOMContentLoaded', () => {
   getLoginInfo()
@@ -20,7 +21,6 @@ function getLoginInfo() {
       'email': email
     }
     postUser(data)
-    getUserId(username)
   })
   let homeButton = document.getElementById('eventMatcher')
   homeButton.addEventListener('click', () => {
@@ -29,17 +29,17 @@ function getLoginInfo() {
   })
 }
 
-function getUserId(username) {
-  fetch(userEndPoint)
-  .then(res => res.json())
-  .then(json => {
-    json.forEach((person => {
-      if (person.username == username){
-        localStorage.setItem('userId', person.id)
-      }
-    }))
-  })
-}
+// function getUserId(username) {
+//   fetch(userEndPoint)
+//   .then(res => res.json())
+//   .then(json => {
+//     json.forEach((person => {
+//       if (person.username == username){
+//         localStorage.setItem('userId', person.id)
+//       }
+//     }))
+//   })
+// }
 
 function postUser(data) {
     fetch(userEndPoint, {
@@ -49,6 +49,9 @@ function postUser(data) {
         Accept: 'application/json'
       },
       body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(json => {
+      localStorage.setItem('userId', json.id)
     })
     toggleVisibility('search')
     toggleVisibility('login')
@@ -81,8 +84,8 @@ function getSearchData(keyword, city, state) {
   let keywordSearch = `&keyword=${keyword}`
   let citySearch = `&city=${city}`
   let stateSearch =`&stateCode=${state}`
-  console.log(BASEURL + APIKEY + citySearch + keywordSearch + stateSearch)
-  fetch(BASEURL + APIKEY + keywordSearch + citySearch + stateSearch)
+  console.log(BASEURL + APIKEY + keywordSearch + citySearch + stateSearch +querySize)
+  fetch(BASEURL + APIKEY + keywordSearch + citySearch + stateSearch + querySize)
   .then(response => response.json())
   .then(json => {
     clearData('ul')
@@ -278,6 +281,7 @@ function showFavorites(event) {
   let removeButton = document.createElement('button')
   removeButton.textContent = 'Remove Event' //remove from favorites
   removeButton.addEventListener('click', () => {
+    li.remove()
     removeFavorite(event)
     alert("Removed from Favorites")
   })
@@ -444,6 +448,10 @@ function removeFavorite(event) {
     headers: {'Content-Type': 'application/json', Accept: 'application/json'},
     body: JSON.stringify(data)
   })
+  // .then(response => json())
+  // .then(json => {
+  //   event.parentElement.remove()
+  // })
 }
 
 function toggleVisibility(id) {

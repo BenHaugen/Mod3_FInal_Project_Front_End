@@ -11,14 +11,28 @@
 </head>
 
 <body>
-  <div class="jumbotron">
 
-    <h1 id="eventMatcher" class="display-4">EventMatcher</h1>
-    <p class="lead">Find your event, without the fluff</p>
-  </div>
+  <!-- Credit: https://startbootstrap.com/snippets/video-header/ -->
+
+  <header>
+    <div class="overlay"></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+      <source src="assets/FinalCoverMovie.mp4" type="video/mp4">
+    </video>
+    <div class="container h-100">
+      <div class="d-flex h-100 text-center align-items-center">
+        <div class="w-100 text-white">
+          <!-- <h1 class="display-3">EventMatcher</h1> -->
+          <a id='eventMatcher'><img class='logo' src="https://i.ibb.co/mhPQ9HL/Logo-Makr-2-JLtf-M.png" alt="Logo-Makr-2-JLtf-M" border="0"></a>
+          <p id="subheader">Searching for events just got easier</p>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <div id="login">
-    <a href="https://imgbb.com/"><img src="https://i.ibb.co/q05141Y/Logo-Makr-7-DDXQK.png" alt="Logo-Makr-7-DDXQK" border="0"></a>
+    <br>
+    <br>
     <form id="loginForm" method="get">
       <h3 class='logintime'>Please Login</h3>
       <input type="text" id="username" placeholder="username">
@@ -29,6 +43,7 @@
 
 
   <div id="search">
+    <br>
     <h3 style="text-align:center"> Event Search </h3>
     <form id="searchForm" method="get">
       <input type="text" id="keyword" placeholder="keyword">
