@@ -117,7 +117,7 @@ function createEventCard(event) {
     moreInfo.addEventListener('click', () => {
       showMore(event)
       toggleVisibility("searchResults")
-      clearData('eventCard')
+      // clearData('eventCard')
     })
     let likeButton = document.createElement('button')
     likeButton.textContent = 'Add to Favorites ❤️'
@@ -155,7 +155,7 @@ function showMore(event) {
   let ul = document.getElementById('showUl')
   let h2 = document.createElement('h2')
   let li = document.createElement('li')
-  ul.className = 'showMoreCard'
+  // ul.className = 'showMoreCard'
   h2.textContent = event.name
   let cityState = document.createElement('p')
   let date = document.createElement('p')
@@ -218,6 +218,7 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
   likeButton.textContent = 'Add to Favorites ❤️'
   likeButton.addEventListener('click', () => {
     saveNewFavorite(event)
+    alert("Successfully Added to Favorites")
   })
   li.appendChild(h2)
   li.appendChild(url)
@@ -278,6 +279,7 @@ function showFavorites(event) {
   removeButton.textContent = 'Remove Event' //remove from favorites
   removeButton.addEventListener('click', () => {
     removeFavorite(event)
+    alert("Removed from Favorites")
   })
 
   let cityState = document.createElement('p')
@@ -309,7 +311,7 @@ function showMoreFromFavorites(event) {
 
   let div = document.getElementById('showMoreFromFavoritesResults')
   let ul = document.getElementById('showMoreFromFavoritesUl')
-  ul.className = "showMoreCard"
+  // ul.className = "showMoreCard"
   let h2 = document.createElement('h2')
   let li = document.createElement('li')
   h2.textContent = event.name
@@ -359,7 +361,7 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
   date.textContent = event.start_date
   let img = document.createElement('img')
   img.src = event.image1
-  img.className = 'cardImage'
+  // img.className = 'cardImage'
   img.style.width = '200px'
   img.style.height = '125px'
   let backButton = document.createElement('button')
@@ -367,7 +369,6 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
   backButton.addEventListener('click', () => {
     // toggleVisibility('search')
     toggleVisibility('showFavorites')
-    toggleVisibility('showMoreCard')
     while (ul.hasChildNodes()) {
       ul.removeChild(ul.firstChild)
     }
@@ -379,6 +380,7 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
   removeButton.textContent = 'Remove Event' //remove from favorites
   removeButton.addEventListener('click', () => {
     removeFavorite(event)
+    alert("Removed from Favorites")
   })
   li.appendChild(h2)
   li.appendChild(url)
@@ -421,7 +423,7 @@ function saveNewFavorite(event) {
 }
 
 function removeFavorite(event) {
-  console.log('in removeFavorite')
+  // console.log('in removeFavorite')
   let data = {
     'user_id': localStorage.getItem('userId'),
     'name': event.name,
